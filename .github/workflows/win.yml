@@ -16,13 +16,31 @@ jobs:
          msys2 -c 'pacman -S --noconfirm libxslt mingw-w64-{x86_64,i686}-toolchain mingw-w64-i686-cmake mingw-w64-x86_64-cmake'
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2  
-    - name: Make Generic64
+    - name: Make
       shell: msys2 {0}
       run: | 
         CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so.vcxproj
-    - name: Build Generic64
+        CFLAGS="-O3 -g0 -march=corei7 -mtune=native" ASMFLAGS="-march=corei7 -mtune=native" make SSSE3/libXKCP.so.vcxproj
+        CFLAGS="-O3 -g0 -march=skylake -mtune=native" ASMFLAGS="-march=skylake -mtune=native" make AVX2/libXKCP.so.vcxproj
+        CFLAGS="-O3 -g0 -march=skylake-avx512 -mtune=native" ASMFLAGS="-march=skylake-avx512 -mtune=native" make AVX512/libXKCP.so.vcxproj
+
+    - name: Build 
       run: |
+        # Build Generic64
         msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP bin\VC\generic64_libXKCP.so.vcxproj
+        # Build SSSE3
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-SSSE3 bin\VC\SSSE3_libXKCP.so.vcxproj
+        # Build AVX2
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX2 bin\VC\AVX2_libXKCP.so.vcxproj
+        # Build AVX512
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX512 bin\VC\AVX512_libXKCP.so.vcxproj
+    - name: Upload win Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: XKCP-win
+        path: |
+          artifacts/*.dll
+          
 
 
       
