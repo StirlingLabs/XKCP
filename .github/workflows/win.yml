@@ -15,8 +15,8 @@ jobs:
           
     - name: Install Depencies
       run: |
-         msys2 -c 'pacman --noconfirm libxslt'
-         msys2 -c 'pacman --noconfirm mingw-w64-{x86_64,i686}-toolchain'   
+         msys2 -c 'pacman -S --noconfirm libxslt'
+         msys2 -c 'pacman -S --noconfirm mingw-w64-{x86_64,i686}-toolchain mingw-w64-i686-cmake mingw-w64-x86_64-cmake'   
     - name: Build Generic64
       shell: msys2 {0}
       run: | 
