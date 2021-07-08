@@ -13,10 +13,20 @@ jobs:
           base-devel
     - name: Install Depencies
       run: |
-         msys2 -c 'pacman -S --noconfirm libxslt'
-         msys2 -c 'pacman -S --noconfirm mingw-w64-{x86_64,i686}-toolchain mingw-w64-i686-cmake mingw-w64-x86_64-cmake'   
-    - name: Build Generic64
+         msys2 -c 'pacman -S --noconfirm libxslt mingw-w64-{x86_64,i686}-toolchain mingw-w64-i686-cmake mingw-w64-x86_64-cmake'   
+    - name: Make Generic64
       shell: msys2 {0}
       run: | 
         CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so.vcxproj
+    - name: Build Generic64
+      run: |
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=$(ProjectDir)..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP bin\VC\generic64_libXKCP.so.vcxproj
+
+
+      
+
+         
         
+        
+    
+
