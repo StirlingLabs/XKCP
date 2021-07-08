@@ -37,20 +37,20 @@ jobs:
     - name: Make AVX2
       shell: msys2 {0}
       run: |
-        CFLAGS="-O3 -g0 -march=skylake -mtune=native" ASMFLAGS="-march=skylake -mtune=native" make AVX2/libXKCP.so.vcxproj
+        CFLAGS="-O3 -g0 -march=skylake -mtune=native" ASMFLAGS="-march=skylake -mtune=native" make AVX2noAsm/libXKCP.so.vcxproj
 
     - name: Build AVX2
       run: |
-        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX2 bin\VC\AVX2_libXKCP.so.vcxproj
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX2 bin\VC\AVX2noAsm_libXKCP.so.vcxproj
 
     - name: Make AVX512
       shell: msys2 {0}
       run: |
-        CFLAGS="-O3 -g0 -march=skylake-avx512 -mtune=native" ASMFLAGS="-march=skylake-avx512 -mtune=native" make AVX512/libXKCP.so.vcxproj
+        CFLAGS="-O3 -g0 -march=skylake-avx512 -mtune=native" ASMFLAGS="-march=skylake-avx512 -mtune=native" make AVX512noAsm/libXKCP.so.vcxproj
     
     - name: Build AVX512
       run: |
-        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX512 bin\VC\AVX512_libXKCP.so.vcxproj
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP-AVX512 bin\VC\AVX512noAsm_libXKCP.so.vcxproj
 
     - name: Upload win Artifact
       uses: actions/upload-artifact@v2
