@@ -20,7 +20,7 @@ jobs:
         CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so.vcxproj
     - name: Build Generic64
       run: |
-        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=$(ProjectDir)..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP bin\VC\generic64_libXKCP.so.vcxproj
+        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP bin\VC\generic64_libXKCP.so.vcxproj
 
 
       
