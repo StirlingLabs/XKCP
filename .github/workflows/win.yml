@@ -18,6 +18,5 @@ jobs:
     - name: Build Generic64
       shell: msys2 {0}
       run: | 
-        set MSYSTEM=MINGW64
-        msys2 -c 'CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so.vcxproj'
-        msbuild -p:Configuration=Release -p:PlatformToolset=v142 -p:CharacterSet=Unicode -p:FunctionLevelLinking=false -p:WholeProgramOptimization=false -p:RuntimeLibrary=MultiThreaded -p:"OutDir=$(ProjectDir)..\..\artifacts\\" -p:Platform=x64 -p:TargetName=libXKCP bin\VC\generic64_libXKCP.so.vcxproj
+        CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so.vcxproj
+        
