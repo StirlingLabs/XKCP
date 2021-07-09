@@ -1,4 +1,4 @@
-name: CD
+name: release
 on: [push, pull_request]
 jobs:
   windows:
@@ -44,7 +44,7 @@ jobs:
       with:
         name: XKCP-win
         path: |
-          artifacts/*.dll
+          bin/artifacts/*.dll
           
   linux:
     name: linux
