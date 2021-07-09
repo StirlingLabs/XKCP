@@ -45,7 +45,7 @@ jobs:
         name: XKCP-win
         path: |
           bin/artifacts/*.dll
-          
+          bin/artifacts/libXKCP-win.so.headers          
   linux:
     name: linux
     if: startsWith(github.ref, 'refs/tags/')
