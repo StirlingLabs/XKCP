@@ -35,7 +35,7 @@ jobs:
           mv bin/AVX2/libXKCP.so bin/artifacts/XKCP-AVX2.dll
           mv bin/AVX512/libXKCP.so bin/artifacts/XKCP-AVX512.dll
           mv bin/SSSE3/libXKCP.so bin/artifacts/XKCP-SSSE3.dll
-          mv bin/generic64/libXKCP.so bin/artifacts/XKCP-generic64.dll
+          mv bin/generic64/libXKCP.so bin/artifacts/XKCP.dll
           mv bin/generic64/libXKCP.so.headers bin/artifacts/XKCP-win.so.headers
           ls bin/artifacts
 
@@ -75,7 +75,7 @@ jobs:
           mv bin/AVX2/libXKCP.so bin/artifacts/libXKCP-AVX2.so
           mv bin/AVX512/libXKCP.so bin/artifacts/libXKCP-AVX512.so
           mv bin/SSSE3/libXKCP.so bin/artifacts/libXKCP-SSSE3.so
-          mv bin/generic64/libXKCP.so bin/artifacts/libXKCP-generic64.so
+          mv bin/generic64/libXKCP.so bin/artifacts/libXKCP.so
           mv bin/generic64/libXKCP.so.headers bin/artifacts/libXKCP-linux.so.headers
           ls bin/artifacts
     - name: Upload Linux Artifact
@@ -113,7 +113,7 @@ jobs:
           mv bin/AVX2/libXKCP.so bin/artifacts/libXKCP-AVX2.dylib
           mv bin/AVX512/libXKCP.so bin/artifacts/libXKCP-AVX512.dylib
           mv bin/SSSE3/libXKCP.so bin/artifacts/libXKCP-SSSE3.dylib
-          mv bin/generic64/libXKCP.so bin/artifacts/libXKCP-generic64.dylib
+          mv bin/generic64/libXKCP.so bin/artifacts/libXKCP.dylib
           mv bin/generic64/libXKCP.so.headers bin/artifacts/libXKCP-osx.so.headers
           ls bin/artifacts
     - name: Upload osx Artifact
