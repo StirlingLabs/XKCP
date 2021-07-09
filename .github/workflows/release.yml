@@ -151,7 +151,7 @@ jobs:
           mkdir artifacts/
           tar czf artifacts/XKCP-linux.tar.gz -C linux/ $(find linux -type f -name "*.so" -exec basename {} \;) libXKCP-linux.so.headers/
           tar czf artifacts/XKCP-osx.tar.gz -C osx/ $(find osx -type f -name "*.dylib" -exec basename {} \;) libXKCP-osx.so.headers/
-          tar czf artifacts/XKCP-win.tar.gz -C osx/ $(find win -type f -name "*.dll" -exec basename {} \;) XKCP-win.so.headers/
+          tar czf artifacts/XKCP-win.tar.gz -C win/ $(find win -type f -name "*.dll" -exec basename {} \;) XKCP-win.so.headers/
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
