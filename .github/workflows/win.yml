@@ -7,13 +7,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: msys2/setup-msys2@v2
-      with:
-        update: true
-        install: >-
-          base-devel
+        
     - name: Install Depencies
       run: |
-         msys2 -c 'pacman -S --noconfirm libxslt mingw-w64-{x86_64,i686}-toolchain mingw-w64-i686-cmake mingw-w64-x86_64-cmake'
+         msys2 -c 'pacman -S --noconfirm libxslt base-devel mingw-w64-x86_64-clang'
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2  
     - name: Make Generic64
