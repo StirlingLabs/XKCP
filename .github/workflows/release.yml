@@ -36,7 +36,7 @@ jobs:
           mv bin/AVX512/libXKCP.so bin/artifacts/XKCP-AVX512.dll
           mv bin/SSSE3/libXKCP.so bin/artifacts/XKCP-SSSE3.dll
           mv bin/generic64/libXKCP.so bin/artifacts/XKCP.dll
-          mv bin/generic64/libXKCP.so.headers bin/artifacts/XKCP-win.so.headers
+          mv bin/generic64/libXKCP.so.headers bin/artifacts/libXKCP-win.so.headers
           ls bin/artifacts
 
     - name: Upload win Artifact
@@ -151,7 +151,7 @@ jobs:
           mkdir artifacts/
           tar czf artifacts/XKCP-linux.tar.gz -C linux/ $(find linux -type f -name "*.so" -exec basename {} \;) libXKCP-linux.so.headers/
           tar czf artifacts/XKCP-osx.tar.gz -C osx/ $(find osx -type f -name "*.dylib" -exec basename {} \;) libXKCP-osx.so.headers/
-          tar czf artifacts/XKCP-win.tar.gz -C win/ $(find win -type f -name "*.dll" -exec basename {} \;) XKCP-win.so.headers/
+          tar czf artifacts/XKCP-win.tar.gz -C win/ $(find win -type f -name "*.dll" -exec basename {} \;) libXKCP-win.so.headers/
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
