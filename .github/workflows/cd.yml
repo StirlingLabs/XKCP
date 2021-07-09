@@ -1,6 +1,50 @@
 name: CD
 on: [push, pull_request]
 jobs:
+  windows:
+    name: win
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: msys2/setup-msys2@v2
+    - name: Install Depencies
+      run: |
+         msys2 -c 'pacman -S --noconfirm libxslt base-devel mingw-w64-x86_64-clang'
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2  
+    - name: Build Generic64
+      shell: msys2 {0}
+      run: | 
+        CFLAGS="-O3 -g0 -march=ivybridge -mtune=native" ASMFLAGS="-march=ivybridge -mtune=native" make generic64/libXKCP.so
+    - name: Build SSSE3
+      shell: msys2 {0}
+      run: |
+        CFLAGS="-O3 -g0 -march=corei7 -mtune=native" ASMFLAGS="-march=corei7 -mtune=native" make SSSE3/libXKCP.so
+    - name: Build AVX2
+      shell: msys2 {0}
+      run: |
+        CFLAGS="-O3 -g0 -march=skylake -mtune=native" ASMFLAGS="-march=skylake -mtune=native" make AVX2/libXKCP.so
+    - name: Build AVX512
+      shell: msys2 {0}
+      run: |
+        CFLAGS="-O3 -g0 -march=skylake-avx512 -mtune=native" ASMFLAGS="-march=skylake-avx512 -mtune=native" make AVX512/libXKCP.so
+    - name: Change Artifact Name
+      run: |
+          mkdir bin/artifacts
+          mv bin/AVX2/libXKCP.so bin/artifacts/XKCP-AVX2.dll
+          mv bin/AVX512/libXKCP.so bin/artifacts/XKCP-AVX512.dll
+          mv bin/SSSE3/libXKCP.so bin/artifacts/XKCP-SSSE3.dll
+          mv bin/generic64/libXKCP.so bin/artifacts/XKCP-generic64.dll
+          mv bin/generic64/libXKCP.so.headers bin/artifacts/XKCP-win.so.headers
+          ls bin/artifacts
+
+    - name: Upload win Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: XKCP-win
+        path: |
+          artifacts/*.dll
+          
   linux:
     name: linux
     if: startsWith(github.ref, 'refs/tags/')
