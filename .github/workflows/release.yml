@@ -161,7 +161,7 @@ jobs:
             artifacts/*.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: get_version 
+      - name: get_version
         run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Send PR
