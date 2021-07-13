@@ -19,7 +19,7 @@ jobs:
         upstream_repository: XKCP/XKCP
         upstream_branch: master
         target_branch: stirling-labs
-        git_pull_args: '--allow-unrelated-histories'                
+        git_pull_args: '--unshallow --allow-unrelated-histories'           
         github_token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Create new commit
