@@ -167,4 +167,3 @@ jobs:
       - name: Send PR
         run: |
           curl --request POST --url 'https://api.github.com/repos/StirlingLabs/XKCP.NET/dispatches' --header 'authorization: token ${{ secrets.TK_TOKEN }}' --data '{"event_type": "release", "client_payload": {"tag":"${{ env.RELEASE_VERSION }}"}' --header "Accept: application/vnd.github.everest-preview+json"
-                  
