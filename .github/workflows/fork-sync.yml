@@ -35,7 +35,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: ''
+        title: 'XKCP/XKCP main branch has changes'
         branch: check-xkcp-upsteram
         body: |
           - Please check changes upstream XKCP master branch.
