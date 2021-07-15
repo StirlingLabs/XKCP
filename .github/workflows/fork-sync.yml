@@ -25,8 +25,8 @@ jobs:
     - name: Create new commit
       if: steps.sync.outputs.has_new_commits
       run: |
-        git config --global user.email "tyler.young@stirlinglabs.com"
-        git config --global user.name "TYoungSL"
+          git config --global user.email "daemon@stirlinglabs.com"
+          git config --global user.name "StirlingLabsDaemon"
         echo 'New changes Upstream XKCP' > xkcp.md
         git add -A
         git commit -m "XKCP/XKCP main branch has changes"        
@@ -36,7 +36,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         title: 'XKCP/XKCP main branch has changes'
-        branch: check-xkcp-upsteram
+        branch: check-xkcp-upstream
         body: |
           - Please check changes upstream XKCP master branch.
         labels: |
