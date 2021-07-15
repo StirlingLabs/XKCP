@@ -19,7 +19,7 @@ jobs:
         upstream_repository: XKCP/XKCP
         upstream_branch: master
         target_branch: stirling-labs
-        git_pull_args: '--unshallow --allow-unrelated-histories'         
+        git_pull_args: '--unshallow --allow-unrelated-histories'     
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create new commit
       if: steps.sync.outputs.has_new_commits
@@ -28,7 +28,7 @@ jobs:
         git config --global user.name "StirlingLabsDaemon"
         echo 'New changes Upstream XKCP' > xkcp.md
         git add -A
-        git commit -m "XKCP/XKCP main branch has changes"      
+        git commit -m "XKCP/XKCP main branch has changes"
     - name: Create Pull Request
       if: steps.sync.outputs.has_new_commits
       uses: peter-evans/create-pull-request@v3
