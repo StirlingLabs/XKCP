@@ -26,7 +26,6 @@ jobs:
       run: |
         git config --global user.email "daemon@stirlinglabs.com"
         git config --global user.name "StirlingLabsDaemon"
-        echo 'New changes Upstream XKCP' > xkcp.md
         git add -A
         git commit -m "XKCP/XKCP main branch has changes"
     - name: Create Pull Request
