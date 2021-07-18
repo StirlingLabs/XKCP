@@ -2,6 +2,11 @@ on:
   schedule:
     - cron:  '0 7 * * 1,4'
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag'
+        required: true
+        default: 'v21.07.0'
 jobs:
   sync_with_upstream:
     runs-on: ubuntu-latest
@@ -17,24 +22,18 @@ jobs:
       with:
         upstream_repository: XKCP/XKCP
         upstream_branch: master
-        target_branch: stirling-labs
-        git_pull_args: '--unshallow --allow-unrelated-histories'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create new commit
-      if: steps.sync.outputs.has_new_commits
-      run: |
-        git config --global user.email "daemon@stirlinglabs.com"
-        git config --global user.name "StirlingLabsDaemon"
-        git add -A
-        git commit -m "XKCP/XKCP main branch has changes"
+        target_branch: master
+        git_pull_args: '--unshallow'
+        github_token: ${{ github.token }}
     - name: Create Pull Request
       if: steps.sync.outputs.has_new_commits
       uses: peter-evans/create-pull-request@v3
       with:
         token:  ${{ github.token }}
-        title: 'XKCP/XKCP main branch has changes'
-        branch: check-xkcp-upstream
+        title: 'New changes XKCP/XKCP master branch has changes check-xkcp-upstream (${{ github.event.client_payload.tag }})'
+        branch: check-xkcp-upstream-${{ github.event.client_payload.tag }}
         body: |
-          - Please check changes upstream XKCP master branch.
+          - Please check changes upstream XKCP master branch. StirlingLabs/XKCP (${{ github.event.client_payload.tag }})
         labels: |
           automated-pr
+          xkcp
