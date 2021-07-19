@@ -6,7 +6,6 @@ on:
       tag:
         description: 'Tag'
         required: true
-        default: 'v21.07.0'
 jobs:
   sync_with_upstream:
     runs-on: ubuntu-latest
