@@ -2,3 +2,4 @@ build/
 bin/
 var/
 artifacts/
+.DS_Store
