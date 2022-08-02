@@ -348,17 +348,17 @@ size_t Xoodyak_DecryptFullBlocks(void *state, const uint8_t *I, uint8_t *O, size
         *((uint32_t*)(O+16)) = *((uint32_t*)(I+16)) ^ _mm_cvtsi128_si32(a1);
         *((uint32_t*)(O+20)) = *((uint32_t*)(I+20)) ^ _mm_cvtsi128_si32(_mm_srli_si128(a1,4));
         a1 = _mm_set_epi32(
-            *((uint32_t*)(I+16)),
-            *((uint32_t*)(I+20)),
             // preserve high words
+            _mm_cvtsi128_si32(_mm_srli_si128(a1,12), 3),
             _mm_cvtsi128_si32(_mm_srli_si128(a1,8), 2),
-            _mm_cvtsi128_si32(_mm_srli_si128(a1,12), 3));
+            *((uint32_t*)(I+20)),
+            *((uint32_t*)(I+16)));
 #else
         *((uint64_t*)(O+16)) = *((uint64_t*)(I+16)) ^ _mm_cvtsi128_si64(a1);
         a1 = _mm_set_epi64x(
-            *((uint64_t*)(I+16)),
             // preserve high words
-             _mm_cvtsi128_si32(_mm_srli_si128(a1,8)));
+             _mm_cvtsi128_si32(_mm_srli_si128(a1,8)),
+            *((uint64_t*)(I+16)));
 #endif
 #endif
         STORE128u(O[0], o0);
