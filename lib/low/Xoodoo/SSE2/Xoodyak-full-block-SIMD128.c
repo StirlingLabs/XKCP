@@ -357,7 +357,7 @@ size_t Xoodyak_DecryptFullBlocks(void *state, const uint8_t *I, uint8_t *O, size
         *((uint64_t*)(O+16)) = *((uint64_t*)(I+16)) ^ _mm_cvtsi128_si64(a1);
         a1 = _mm_set_epi64x(
             // preserve high words
-             _mm_cvtsi128_si32(_mm_srli_si128(a1,8)),
+             _mm_cvtsi128_si64(_mm_srli_si128(a1,8)),
             *((uint64_t*)(I+16)));
 #endif
 #endif
