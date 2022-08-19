@@ -18,8 +18,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: XKCP
+      - name: List Files
+        run: |
+          ls -laR
       - name: Repackage as release artifacts
         run: |
+          mkdir artifacts
           tar czf artifacts/XKCP-linux.tar.gz -C Linux/*
           tar czf artifacts/XKCP-osx.tar.gz -C macOS/*
           tar czf artifacts/XKCP-win.tar.gz -C Windows/*
