@@ -179,7 +179,7 @@ jobs:
         shell: bash
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: XKCP-${{ runner.os }}
       - name: List Files
@@ -231,7 +231,7 @@ jobs:
         shell: bash
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
       - name: Collect
         run: |
           mkdir ${collectDir}
